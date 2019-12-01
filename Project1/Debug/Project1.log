@@ -1,0 +1,14 @@
+﻿  Calculate.cpp
+  MyForm2.cpp
+d:\proj\project1\project1\myform2.h(474): warning C4101: 'e': unreferenced local variable
+d:\proj\project1\project1\myform2.h(633): warning C4305: 'initializing': truncation from 'int' to 'wchar_t'
+d:\proj\project1\project1\myform2.h(633): warning C4309: 'initializing': truncation of constant value
+d:\proj\project1\project1\myform2.h(634): warning C4305: 'initializing': truncation from 'int' to 'wchar_t'
+d:\proj\project1\project1\myform2.h(634): warning C4309: 'initializing': truncation of constant value
+d:\proj\project1\project1\myform2.h(635): warning C4305: 'initializing': truncation from 'int' to 'wchar_t'
+d:\proj\project1\project1\myform2.h(635): warning C4309: 'initializing': truncation of constant value
+  OpenFiles.cpp
+  ReadCSV.cpp
+  Generating Code...
+  .NETFramework,Version=v4.6.AssemblyAttributes.cpp
+  Project1.vcxproj -> D:\proj\Project1\Debug\Project1.exe
