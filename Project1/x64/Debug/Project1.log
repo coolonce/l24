@@ -1,0 +1,8 @@
+﻿  Calculate.cpp
+  MyForm2.cpp
+d:\proj\l24\project1\myform2.h(474): warning C4101: 'e': unreferenced local variable
+  OpenFiles.cpp
+  ReadCSV.cpp
+  Generating Code...
+  .NETFramework,Version=v4.6.AssemblyAttributes.cpp
+LINK : fatal error LNK1561: entry point must be defined

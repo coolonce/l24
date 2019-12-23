@@ -20,6 +20,8 @@ namespace Project1 {
 	public:
 		List<array<String^>^>^ table;
 		Dictionary<String^, array<double>^>^  dataMarkFuel;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
+	public:
 		List<array<double>^>^  preparedate;
 		MyForm(void)
 		{
@@ -42,7 +44,8 @@ namespace Project1 {
 			}
 		}
 	private: System::Windows::Forms::OpenFileDialog^  openFileDialog1;
-	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  loadData;
+
 	
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::DataGridView^  SourceDataGrid;
@@ -54,7 +57,7 @@ namespace Project1 {
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button3;
 	private: System::Windows::Forms::Button^  button4;
-	private: System::Windows::Forms::TextBox^  textBoxDate;
+
 	private: System::Windows::Forms::TextBox^  textBoxMark;
 	private: System::Windows::Forms::TextBox^  textBoxMileage;
 	private: System::Windows::Forms::TextBox^  textBoxPrice;
@@ -87,7 +90,7 @@ namespace Project1 {
 		void InitializeComponent(void)
 		{
 			this->openFileDialog1 = (gcnew System::Windows::Forms::OpenFileDialog());
-			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->loadData = (gcnew System::Windows::Forms::Button());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->SourceDataGrid = (gcnew System::Windows::Forms::DataGridView());
 			this->PrepDataView = (gcnew System::Windows::Forms::DataGridView());
@@ -98,7 +101,6 @@ namespace Project1 {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->button4 = (gcnew System::Windows::Forms::Button());
-			this->textBoxDate = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxMark = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxMileage = (gcnew System::Windows::Forms::TextBox());
 			this->textBoxPrice = (gcnew System::Windows::Forms::TextBox());
@@ -111,6 +113,7 @@ namespace Project1 {
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->textBoxSum = (gcnew System::Windows::Forms::TextBox());
 			this->buttonAddRow = (gcnew System::Windows::Forms::Button());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->SourceDataGrid))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->PrepDataView))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->MarkData))->BeginInit();
@@ -120,15 +123,15 @@ namespace Project1 {
 			// 
 			this->openFileDialog1->FileName = L"openFileDialog1";
 			// 
-			// button1
+			// loadData
 			// 
-			this->button1->Location = System::Drawing::Point(264, 7);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(116, 32);
-			this->button1->TabIndex = 0;
-			this->button1->Text = L"Загрузить файл";
-			this->button1->UseVisualStyleBackColor = true;
-			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
+			this->loadData->Location = System::Drawing::Point(264, 7);
+			this->loadData->Name = L"loadData";
+			this->loadData->Size = System::Drawing::Size(116, 32);
+			this->loadData->TabIndex = 0;
+			this->loadData->Text = L"Загрузить файл";
+			this->loadData->UseVisualStyleBackColor = true;
+			this->loadData->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
 			// textBox2
 			// 
@@ -152,18 +155,24 @@ namespace Project1 {
 			// 
 			// PrepDataView
 			// 
+			this->PrepDataView->AllowUserToAddRows = false;
+			this->PrepDataView->AllowUserToDeleteRows = false;
 			this->PrepDataView->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->PrepDataView->Location = System::Drawing::Point(12, 610);
 			this->PrepDataView->Name = L"PrepDataView";
+			this->PrepDataView->ReadOnly = true;
 			this->PrepDataView->RowTemplate->Height = 24;
 			this->PrepDataView->Size = System::Drawing::Size(741, 288);
 			this->PrepDataView->TabIndex = 4;
 			// 
 			// MarkData
 			// 
+			this->MarkData->AllowUserToAddRows = false;
+			this->MarkData->AllowUserToDeleteRows = false;
 			this->MarkData->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->MarkData->Location = System::Drawing::Point(779, 161);
 			this->MarkData->Name = L"MarkData";
+			this->MarkData->ReadOnly = true;
 			this->MarkData->RowTemplate->Height = 24;
 			this->MarkData->Size = System::Drawing::Size(433, 737);
 			this->MarkData->TabIndex = 5;
@@ -224,13 +233,6 @@ namespace Project1 {
 			this->button4->Text = L"Сохранить исходные данные";
 			this->button4->UseVisualStyleBackColor = true;
 			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click);
-			// 
-			// textBoxDate
-			// 
-			this->textBoxDate->Location = System::Drawing::Point(12, 92);
-			this->textBoxDate->Name = L"textBoxDate";
-			this->textBoxDate->Size = System::Drawing::Size(127, 22);
-			this->textBoxDate->TabIndex = 12;
 			// 
 			// textBoxMark
 			// 
@@ -308,6 +310,7 @@ namespace Project1 {
 			// label9
 			// 
 			this->label9->AutoSize = true;
+			this->label9->Enabled = false;
 			this->label9->Location = System::Drawing::Point(653, 54);
 			this->label9->Name = L"label9";
 			this->label9->Size = System::Drawing::Size(50, 17);
@@ -316,6 +319,7 @@ namespace Project1 {
 			// 
 			// textBoxSum
 			// 
+			this->textBoxSum->Enabled = false;
 			this->textBoxSum->Location = System::Drawing::Point(656, 92);
 			this->textBoxSum->Name = L"textBoxSum";
 			this->textBoxSum->Size = System::Drawing::Size(121, 22);
@@ -331,11 +335,22 @@ namespace Project1 {
 			this->buttonAddRow->UseVisualStyleBackColor = true;
 			this->buttonAddRow->Click += gcnew System::EventHandler(this, &MyForm::buttonAddRow_Click);
 			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->CustomFormat = L"dd.MM.yyyy";
+			this->dateTimePicker1->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
+			this->dateTimePicker1->Location = System::Drawing::Point(12, 92);
+			this->dateTimePicker1->MinDate = System::DateTime(1970, 1, 1, 0, 0, 0, 0);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(127, 22);
+			this->dateTimePicker1->TabIndex = 25;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1224, 1056);
+			this->ClientSize = System::Drawing::Size(1224, 1047);
+			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->buttonAddRow);
 			this->Controls->Add(this->textBoxSum);
 			this->Controls->Add(this->label9);
@@ -348,7 +363,6 @@ namespace Project1 {
 			this->Controls->Add(this->textBoxPrice);
 			this->Controls->Add(this->textBoxMileage);
 			this->Controls->Add(this->textBoxMark);
-			this->Controls->Add(this->textBoxDate);
 			this->Controls->Add(this->button4);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
@@ -359,7 +373,7 @@ namespace Project1 {
 			this->Controls->Add(this->PrepDataView);
 			this->Controls->Add(this->SourceDataGrid);
 			this->Controls->Add(this->textBox2);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->loadData);
 			this->Name = L"MyForm";
 			this->Text = L"Бензин";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->SourceDataGrid))->EndInit();
@@ -371,8 +385,12 @@ namespace Project1 {
 		}
 #pragma endregion
 
+
+#pragma region MyCode
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
-			
+			/*
+			*	Считывание исходных данных
+			*/
 			if (this->openFileDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK)
 			{
 				System::String^ filepath = this->openFileDialog1->FileName;
@@ -388,10 +406,10 @@ namespace Project1 {
 				
 			}
 		}
+
 	private: System::Void label7_Click(System::Object^  sender, System::EventArgs^  e) {
 	}
 	private: void render() {
-
 		Calculate clc(this->table);
 		clc.work();
 		this->dataMarkFuel = clc.getAvgMarkFuel(clc.table_prepare, clc.fuel_codes);
@@ -405,12 +423,18 @@ namespace Project1 {
 			if (row[0] == "date")
 			{
 				SourceDataGrid->ColumnCount = row->Length;
-				for (int i = 0; i < row->Length; i++)
-				{
+				SourceDataGrid->Columns[0]->Name = "Дата";
+				SourceDataGrid->Columns[1]->Name = "Марка бензина";
+				SourceDataGrid->Columns[2]->Name = "Пробег (в милях)";
+				SourceDataGrid->Columns[3]->Name = "Цена галлона (в центах)";
+				SourceDataGrid->Columns[4]->Name = "Количество галлонов";
+				SourceDataGrid->Columns[5]->Name = "Сумма";
+				//for (int i = 0; i < row->Length; i++)
+				//{
 
-					SourceDataGrid->Columns[i]->Name = row[i];
-					//SourceDataGrid->Columns[i].Name = row[i];
-				}
+				//	//SourceDataGrid->Columns[i]->Name = row[i];
+				//	//SourceDataGrid->Columns[i].Name = row[i];
+				//}
 				continue;
 			}
 			array<String^>^ tmp = {
@@ -442,8 +466,7 @@ namespace Project1 {
 			};
 			PrepDataView->Rows->Add(tmp);
 		}
-
-		
+				
 		MarkData->ColumnCount = 4;
 		MarkData->Columns[0]->Name = "Марка бензина";
 		MarkData->Columns[1]->Name = "Цена галлона в центах";
@@ -452,8 +475,6 @@ namespace Project1 {
 		MarkData->Rows->Clear();
 		for each (auto marks in this->dataMarkFuel)
 		{
-
-
 			array<String^>^ tmp = {
 				marks.Key,
 				marks.Value[0].ToString(),
@@ -465,57 +486,88 @@ namespace Project1 {
 	}
 
 	private: bool validate() {
-//		System::Convert::ToDouble(row[2])
-		int countGood = 6;
-		try
+		int countGood = 5;
+		/*try
 		{
 			DateTime::Parse(textBoxDate->Text);
+			
+			textBoxDate->BackColor = Color::FromName("Window");
 		}
 		catch (System::FormatException ^ e)
 		{
+			
 			textBoxDate->BackColor = Color::FromName("Red");
 			countGood--;
-		}
+		}*/
 		double tmp;
 		if (!(Double::TryParse(textBoxMileage->Text, tmp))) {
 			textBoxMark->BackColor = Color::FromName("Red");
 			countGood--;
 		}
+		else {
+			textBoxMark->BackColor = Color::FromName("Window");
+		}
+
 		if (!(Double::TryParse(textBoxMileage->Text, tmp))) {
 			textBoxMileage->BackColor = Color::FromName("Red");
 			countGood--;
 		}
+		else {
+			textBoxMileage->BackColor = Color::FromName("Window");
+		}
+
+
 		if (!(Double::TryParse(textBoxPrice->Text, tmp))) {
 			textBoxPrice->BackColor = Color::FromName("Red");
 			countGood--;
 		}
+		else {
+			textBoxPrice->BackColor = Color::FromName("Window");
+		}
+
 		if (!(Double::TryParse(textBoxCount->Text, tmp))) {
 			textBoxCount->BackColor = Color::FromName("Red");
 			countGood--;
 		}
+		else {
+			textBoxCount->BackColor = Color::FromName("Window");
+		}
 
-		if (!(Double::TryParse(textBoxSum->Text, tmp))) {
+		/*if (!(Double::TryParse(textBoxSum->Text, tmp))) {
 			textBoxSum->BackColor = Color::FromName("Red");
 			countGood--;
-		}		
+		}
+		else {
+			textBoxSum->BackColor = Color::FromName("Window");
+		}*/
+
+
 		if (table == nullptr) {
 			MessageBox::Show("Необходимо загрузить основной файл данных");
 			countGood--;
 		}
-		return countGood == 6;
+
+
+		return countGood == 5;
 	}
+
 	private: System::Void buttonAddRow_Click(System::Object^  sender, System::EventArgs^  e) {
 		bool correctValid = this->validate();
 		if (!correctValid)
 			return;
 
+		double price = 0;
+		double count = 0;
+		Double::TryParse(textBoxPrice->Text, price);
+		Double::TryParse(textBoxCount->Text, count);
+		double sum =  price*count;
 		array<String^>^ tmp = {
-			textBoxDate->Text,
+			this->dateTimePicker1->Text,
 			textBoxMark->Text,
 			textBoxMileage->Text,
 			textBoxPrice->Text,
 			textBoxCount->Text,
-			textBoxSum->Text,
+			sum.ToString(),
 		};
 		table->Add(tmp);
 		this->render();
@@ -524,6 +576,7 @@ namespace Project1 {
 	
 
 	private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+		// Сохранение исходных данных
 		SaveFileDialog^ sfd = gcnew SaveFileDialog();
 		if (table == nullptr) {
 			MessageBox::Show("Нет данных для сохранения");
@@ -565,6 +618,7 @@ namespace Project1 {
 		}
 	}
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+		//Сохранение обработанных данных
 		SaveFileDialog^ sfd = gcnew SaveFileDialog();
 		if (preparedate == nullptr) {
 			MessageBox::Show("Нет данных для сохранения");
@@ -579,12 +633,12 @@ namespace Project1 {
 			{
 
 				String^ path = sfd->FileName;
-				StreamWriter^ writer = gcnew StreamWriter(File::Create(path));
+				StreamWriter^ writer = gcnew StreamWriter(File::Create(path), System::Text::Encoding::UTF8);
 				try
 				{
-					writer->Write(L"Пробег между заправками;Пробег на 1 галон;Стоимость пробега в одну милю;Стоимость одного дня;Время расходывания одного галлона\t\r\n");
+					writer->Write("Пробег между заправками;Пробег на 1 галон;Стоимость пробега в одну милю;Стоимость одного дня;Время расходывания одного галлона\t\r\n");
 					
-					PrepDataView->Rows->Clear();
+					//PrepDataView->Rows->Clear();
 					for each (array<double>^ row in preparedate)
 					{
 
@@ -610,6 +664,7 @@ namespace Project1 {
 		}
 	}
 	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+		//Сохранение данных по маркам бензина
 		SaveFileDialog^ sfd = gcnew SaveFileDialog();
 		if (dataMarkFuel == nullptr) {
 			MessageBox::Show("Нет данных для сохранения");
@@ -624,17 +679,11 @@ namespace Project1 {
 			{
 
 				String^ path = sfd->FileName;
-				StreamWriter^ writer = gcnew StreamWriter(File::Create(path));
+				StreamWriter^ writer = gcnew StreamWriter(File::Create(path), System::Text::Encoding::UTF8);
 				try
 				{
-
-					
-
 					String^ str = "Марка бензина;Цена галлона в центах;Кол-во галлонов;Сумма\t\r\n";
 					writer->Write(str);
-
-
-
 					for each (auto row in dataMarkFuel)
 					{
 						String^ saveStr = "";
@@ -657,5 +706,6 @@ namespace Project1 {
 			delete sfd;
 		}
 	}
+#pragma endregion
 };
 }

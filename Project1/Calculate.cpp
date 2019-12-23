@@ -65,6 +65,7 @@ namespace Project1 {
 		Calculate::table_prepare = table_double;
 		//List<double>^ rollAvgMileage = getMA(mileage, mileage->Count, 2);
 	}
+
 	Dictionary<String^, array<double>^>^  Calculate::getAvgMarkFuel(List<array<double>^>^ data, Dictionary<String^, double>^ fuel_dict) {
 
 		Dictionary<String^, array<double>^>^ prepData = gcnew Dictionary<String^, array<double>^>();
